@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ZeroHack</title>
+  <style>
+    body {
+      background-color: #000;
+      color: lime;
+      font-family: 'Courier New', Courier, monospace;
+      padding: 20px;
+    }
+    h1, h2 {
+      text-align: center;
+      color: lime;
+      border-bottom: 2px solid lime;
+      padding-bottom: 5px;
+      margin-top: 40px;
+    }
+    ul, ol {
+      margin-left: 40px;
+    }
+    a {
+      color: red;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    p {
+      line-height: 1.6;
+      text-align: center;
+    }
+    .diagram {
+      text-align: left;
+      margin-left: 10%;
+      margin-right: 10%;
+      background-color: #111;
+      padding: 20px;
+      border: 1px solid lime;
+      border-radius: 10px;
+    }
+    center {
+      margin-top: 40px;
+      border-top: 1px solid lime;
+      padding-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>ZeroHack</h1>
+  <p>All in One Hacking System Like Flipper Zero</p>
+
+  <h2>Required Components</h2>
+  <ul>
+    <li><strong>ESP32 Dev Board</strong> (e.g., ESP32-WROOM-32 or ESP32-WROVER)</li>
+    <li><strong>IR LED</strong> (for IR Blaster)</li>
+    <li><strong>433MHz RF Transmitter & Receiver</strong></li>
+    <li><strong>NFC Module</strong> (e.g., PN532 via I2C/SPI)</li>
+    <li><strong>Wi-Fi Module</strong> (built-in in ESP32)</li>
+    <li><strong>Bluetooth LE</strong> (built-in in ESP32)</li>
+    <li><strong>125kHz RFID Module</strong> (e.g., RFID-RC522)</li>
+    <li><strong>iButton Reader Module</strong></li>
+    <li><strong>SubGHz Transceiver</strong> (e.g., CC1101)</li>
+    <li><strong>GPIO Pins / Breadboard / Jumper wires</strong></li>
+    <li><strong>USB OTG Cable</strong> (for power + serial communication)</li>
+    <li><strong>Battery or USB power supply</strong></li>
+  </ul>
+
+  <h2>Wiring Diagram Summary</h2>
+  <ul>
+    <li><strong>IR LED</strong> — GPIO 23 (with 220Ω resistor)</li>
+    <li><strong>RF 433 MHz TX</strong> — GPIO 17</li>
+    <li><strong>RF 433 MHz RX</strong> — GPIO 16</li>
+    <li><strong>NFC Module (PN532)</strong> — I2C: GPIO 21 (SDA), GPIO 22 (SCL)</li>
+    <li><strong>RFID-RC522</strong> — SPI: MOSI (GPIO 23), MISO (GPIO 19), SCK (GPIO 18), SDA (GPIO 5)</li>
+    <li><strong>SubGHz CC1101</strong> — SPI: MOSI (GPIO 23), MISO (GPIO 19), SCK (GPIO 18), CSN (GPIO 15)</li>
+    <li><strong>iButton Module</strong> — GPIO 13</li>
+  </ul>
+
+  <h2>Power Supply & Communication</h2>
+  <ul>
+    <li>ESP32 powered via USB OTG from the Android app (ZeroHack)</li>
+    <li>Communication: USB Serial, Bluetooth, or WiFi (TCP Socket or HTTP)</li>
+  </ul>
+
+  <h2>Android App (ZeroHack) Modules</h2>
+  <ul>
+    <li>IR Blast</li>
+    <li>RF Send</li>
+    <li>NFC Ping</li>
+    <li>WiFi Jam & Deauth</li>
+    <li>GPIO Control</li>
+    <li>BadUSB Emulation</li>
+    <li>RFID Emulation</li>
+    <li>iButton Emulation</li>
+    <li>SubGHz Scan</li>
+    <li>Signal Replay</li>
+    <li>Bluetooth Exploit</li>
+    <li>UART Hacking</li>
+    <li>Logic Analyzer</li>
+  </ul>
+
+  <h2>Firmware Flashing</h2>
+  <ol>
+    <li>Use PlatformIO or Arduino IDE</li>
+    <li>Select ESP32 Dev Board</li>
+    <li>Upload custom firmware (.ino or .bin) for each module</li>
+    <li>Configure UART or BLE/WiFi communication for mobile control</li>
+  </ol>
+
+  <h2>ESP32 Components Connection</h2>
+  <div class="diagram">
+    [ESP32 BOARD]<br>
+    |-- GPIO 17 ------> IR Transmitter (OUT)<br>
+    |-- GPIO 16 ------> RF Transmitter (DATA)<br>
+    |-- GPIO 15 <------ RF Receiver (DATA)<br>
+    |-- GPIO 21 <--> NFC Module (SDA)<br>
+    |-- GPIO 22 ------> NFC Module (SCL)<br>
+    |-- GPIO 23 ------> CC1101 SubGHz (SI)<br>
+    |-- GPIO 19 <------ CC1101 SubGHz (SO)<br>
+    |-- GPIO 18 ------> CC1101 SubGHz (SCK)<br>
+    |-- GPIO 5  ------> CC1101 SubGHz (CSN)<br>
+    |-- GPIO 13 ------> RFID Module (SDA)<br>
+    |-- GPIO 12 ------> iButton Probe<br>
+    |-- GPIO 25 <--> UART TX<br>
+    |-- GPIO 26 <--> UART RX<br>
+    |-- GPIO 32 ------> WiFi Jammer Antenna<br>
+    |-- GPIO 33 ------> Bluetooth Module (for external amp/hack)<br>
+    |-- GPIOs 2, 4, 27 --> General GPIO Control (Relays, LEDs, etc.)<br>
+    GND -------------> All Modules' GND<br>
+    3V3 or 5V -------> VCC depending on module requirement
+  </div>
+
+  <h2>Future Expandability</h2>
+  <ul>
+    <li>Modular firmware system for additional hacking tools</li>
+    <li>OTA updates via ZeroHack App</li>
+    <li>Expandable Bluetooth device scanner/sniffer</li>
+    <li>File-based scripting system (BadUSB, replay scripts)</li>
+  </ul>
+
+  <center>
+    <p>ZeroHack Application Source Code</p>
+    <a href="./ZeroHackFullAppSourecCode.zip">Download Zip</a><br><br>
+    <p>ZeroHack Firmware Source Code</p>
+    <a href="ZeroHackFirmware.zip">Download Zip</a>
+
+    <h2>CopyRight</h2>
+    <p>Humayun Shahriar Himu</p>
+  </center>
+</body>
+</html> 
